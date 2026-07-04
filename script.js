@@ -220,7 +220,7 @@
     // Limpiar formulario
     formProducto.reset();
 
-    // Limpia los mensajes de validación
+    // Funcion quee limpia los mensajes de validación
     errorNombre.innerHTML = "";
     errorDescripcion.innerHTML = "";
     errorCategoria.innerHTML = "";
