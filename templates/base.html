@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo if titulo else "Cauchos Coca" }}</title>
+
+    <!-- Enlace CDN Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    
+    <!-- Archivo CSS cargado mediante url_for desde static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}"> 
+</head>  
+<body>
+
+    <!-- Encabezado Principal -->
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Sistema de Gestión de Ventas Cauchos Coca</h1>
+    </header>
+
+    <!-- Botón para abrir el Modal -->
+    <div class="text-center my-3">
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalInfo">
+            Ver información del sistema
+        </button>
+    </div>
+
+    <!-- Menú de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('productos') }}">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('quienes_somos') }}">Quiénes Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a>
+                    </li> 
+                </ul>
+            </div>  
+        </div>
+    </nav>
+    
+    <!-- CONTENIDO PRINCIPAL DINÁMICO -->
+    <main>
+        {% block content %}
+        <!-- Aquí se inyectará el contenido de index.html y demás módulos -->
+        {% endblock %}
+    </main>
+    
+    <!-- Modal Bootstrap común -->
+    <div class="modal fade" id="modalInfo" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Información del Sistema</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Este sistema permite registrar productos de manera dinámica utilizando JavaScript y Bootstrap.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aviso Lateral / Barra informativa -->
+    <aside class="text-center bg-warning py-3">
+        Atención de lunes a viernes de 8:00am a 17:00pm y días sábados hasta 12:00pm
+    </aside>
+    
+    <!-- Pie de página -->
+    <footer class="bg-dark text-white text-center py-3">
+        Angel Herrera, Desarrollo Web, Periodo 2026-2026
+    </footer>
+
+    <!-- Enlace a Scripts de Bootstrap y JS personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

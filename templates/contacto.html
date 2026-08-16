@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h2 class="text-primary fw-bold mb-4">Contáctenos</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" placeholder="Ingrese su nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" placeholder="nombre@correo.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Asunto</label>
+                        <input type="text" class="form-control" placeholder="Motivo de consulta">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mensaje</label>
+                        <textarea class="form-control" rows="4" placeholder="Escriba su mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Catálogo de Productos</h2>
+        <button class="btn btn-primary">+ Nuevo Producto</button>
+    </div>
+
+    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio Unitario</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>P-001</td>
+                    <td>Bujes en Caucho Reforzado</td>
+                    <td>Cauchos</td>
+                    <td>$15.00</td>
+                    <td><span class="badge bg-success">45 unidades</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning">Editar</button>
+                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>P-002</td>
+                    <td>Bases de Motor Universales</td>
+                    <td>Repuestos</td>
+                    <td>$35.00</td>
+                    <td><span class="badge bg-success">20 unidades</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning">Editar</button>
+                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>P-003</td>
+                    <td>Alzas de Amortiguador 2"</td>
+                    <td>Accesorios</td>
+                    <td>$25.00</td>
+                    <td><span class="badge bg-warning text-dark">8 unidades</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning">Editar</button>
+                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

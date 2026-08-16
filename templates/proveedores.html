@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Control de Proveedores</h2>
+        <button class="btn btn-warning text-dark">+ Nuevo Proveedor</button>
+    </div>
+
+    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+        <table class="table table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>RUC</th>
+                    <th>Empresa Proveedora</th>
+                    <th>Contacto Directo</th>
+                    <th>Teléfono</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1790011223001</td>
+                    <td>Importadora de Cauchos del Ecuador S.A.</td>
+                    <td>Ing. Carlos Mendoza</td>
+                    <td>022345678</td>
+                    <td>Quito</td>
+                </tr>
+                <tr>
+                    <td>0992345678001</td>
+                    <td>Polímeros y Resinas Cía. Ltda.</td>
+                    <td>Lcda. María Torres</td>
+                    <td>042889900</td>
+                    <td>Guayaquil</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

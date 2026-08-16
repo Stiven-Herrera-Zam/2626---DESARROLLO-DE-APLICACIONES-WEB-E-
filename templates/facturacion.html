@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="text-primary fw-bold mb-4">Emisión de Facturas</h2>
+
+    <div class="card shadow-sm border-0 p-4 bg-white">
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Cliente</label>
+                <select class="form-select">
+                    <option selected>Seleccionar cliente por Cédula o RUC...</option>
+                    <option>1500123456 - Juan Carlos Pérez</option>
+                    <option>1792019283001 - Taller Automotriz El Amigo</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Fecha de Emisión</label>
+                <input type="date" class="form-control" value="2026-08-14">
+            </div>
+            <div class="col-md-8">
+                <label class="form-label fw-bold">Producto / Servicio</label>
+                <select class="form-select">
+                    <option selected>Seleccionar producto de caucho...</option>
+                    <option>Bujes en Caucho Reforzado ($15.00)</option>
+                    <option>Bases de Motor Universales ($35.00)</option>
+                    <option>Alzas de Amortiguador 2" ($25.00)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Cantidad</label>
+                <input type="number" class="form-control" value="1" min="1">
+            </div>
+            <div class="col-12 text-end mt-4">
+                <button type="submit" class="btn btn-danger btn-lg">Generar Factura</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="bg-white p-5 rounded shadow-sm">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <h2 class="text-primary fw-bold mb-3">Quiénes Somos</h2>
+                <p class="lead text-secondary">
+                    Cauchos Coca es una empresa localizada en la ciudad de El Coca, dedicada a la producción y fabricación de piezas de caucho de la más alta calidad.
+                </p>
+                <p>
+                    Nos especializamos en productos automotrices e industriales como bujes, alzas de amortiguador, bases de motor y barras estabilizadoras. Garantizamos soluciones exactas, resistentes y a la medida de cada necesidad.
+                </p>
+            </div>
+            <div class="col-md-5 text-center">
+                <img src="{{ url_for('static', filename='img/Accesorios.jpeg') }}" class="img-fluid rounded shadow" alt="Cauchos Coca">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

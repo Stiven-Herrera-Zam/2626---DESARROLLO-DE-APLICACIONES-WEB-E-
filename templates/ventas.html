@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Historial de Ventas</h2>
+        <a href="{{ url_for('facturacion') }}" class="btn btn-success">+ Nueva Venta</a>
+    </div>
+
+    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>N° Venta</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>V-00101</td>
+                    <td>Juan Carlos Pérez</td>
+                    <td>14/08/2026</td>
+                    <td>$45.00</td>
+                    <td><span class="badge bg-success">Completada</span></td>
+                    <td><button class="btn btn-sm btn-outline-secondary">Ver Detalle</button></td>
+                </tr>
+                <tr>
+                    <td>V-00102</td>
+                    <td>Taller Automotriz El Amigo</td>
+                    <td>14/08/2026</td>
+                    <td>$140.00</td>
+                    <td><span class="badge bg-success">Completada</span></td>
+                    <td><button class="btn btn-sm btn-outline-secondary">Ver Detalle</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
