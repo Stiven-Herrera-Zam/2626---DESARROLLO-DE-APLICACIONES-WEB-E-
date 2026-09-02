@@ -3,8 +3,60 @@
 {% block content %}
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary fw-bold">Catálogo de Productos</h2>
-        <button class="btn btn-primary">+ Nuevo Producto</button>
+        <h2 class="text-primary fw-bold">Gestión de Productos</h2>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4 mb-4 bg-white">
+        <h4 class="text-secondary mb-3">Registrar / Editar Producto</h4>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    {{ form.codigo.label(class="form-label fw-bold") }}
+                    {{ form.codigo(class="form-control") }}
+                    {% for error in form.codigo.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-8">
+                    {{ form.nombre.label(class="form-label fw-bold") }}
+                    {{ form.nombre(class="form-control") }}
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.categoria.label(class="form-label fw-bold") }}
+                    {{ form.categoria(class="form-control") }}
+                    {% for error in form.categoria.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.precio.label(class="form-label fw-bold") }}
+                    {{ form.precio(class="form-control", type="number", step="0.01") }}
+                    {% for error in form.precio.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.stock.label(class="form-label fw-bold") }}
+                    {{ form.stock(class="form-control", type="number") }}
+                    {% for error in form.stock.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-12 text-end mt-3">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="table-responsive bg-white p-3 rounded shadow-sm">
@@ -16,43 +68,32 @@
                     <th>Categoría</th>
                     <th>Precio Unitario</th>
                     <th>Stock</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>P-001</td>
-                    <td>Bujes en Caucho Reforzado</td>
-                    <td>Cauchos</td>
-                    <td>$15.00</td>
-                    <td><span class="badge bg-success">45 unidades</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-warning">Editar</button>
-                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>P-002</td>
-                    <td>Bases de Motor Universales</td>
-                    <td>Repuestos</td>
-                    <td>$35.00</td>
-                    <td><span class="badge bg-success">20 unidades</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-warning">Editar</button>
-                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>P-003</td>
-                    <td>Alzas de Amortiguador 2"</td>
-                    <td>Accesorios</td>
-                    <td>$25.00</td>
-                    <td><span class="badge bg-warning text-dark">8 unidades</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-warning">Editar</button>
-                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                </tr>
+                {% if lista_productos %}
+                    {% for p in lista_productos %}
+                    <tr>
+                        <td>{{ p.codigo }}</td>
+                        <td class="fw-bold">{{ p.nombre }}</td>
+                        <td>{{ p.categoria }}</td>
+                        <td>${{ "%.2f"|format(p.precio) }}</td>
+                        <td>
+                            {% if p.stock > 10 %}
+                                <span class="badge bg-success">{{ p.stock }} unidades</span>
+                            {% elif p.stock > 0 %}
+                                <span class="badge bg-warning text-dark">{{ p.stock }} unidades</span>
+                            {% else %}
+                                <span class="badge bg-danger">Agotado</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No existen productos registrados.</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>

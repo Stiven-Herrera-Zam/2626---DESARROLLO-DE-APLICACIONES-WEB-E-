@@ -4,7 +4,59 @@
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary fw-bold">Control de Proveedores</h2>
-        <button class="btn btn-warning text-dark">+ Nuevo Proveedor</button>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4 mb-4 bg-white">
+        <h4 class="text-secondary mb-3">Registrar Proveedor</h4>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    {{ form.ruc.label(class="form-label fw-bold") }}
+                    {{ form.ruc(class="form-control") }}
+                    {% for error in form.ruc.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-8">
+                    {{ form.empresa.label(class="form-label fw-bold") }}
+                    {{ form.empresa(class="form-control") }}
+                    {% for error in form.empresa.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.contacto.label(class="form-label fw-bold") }}
+                    {{ form.contacto(class="form-control") }}
+                    {% for error in form.contacto.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.telefono.label(class="form-label fw-bold") }}
+                    {{ form.telefono(class="form-control") }}
+                    {% for error in form.telefono.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.ciudad.label(class="form-label fw-bold") }}
+                    {{ form.ciudad(class="form-control") }}
+                    {% for error in form.ciudad.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-12 text-end mt-3">
+                    {{ form.submit(class="btn btn-warning text-dark") }}
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="table-responsive bg-white p-3 rounded shadow-sm">
@@ -19,20 +71,19 @@
                 </tr>
             </thead>
             <tbody>
+                {% for prov in lista_proveedores %}
                 <tr>
-                    <td>1790011223001</td>
-                    <td>Importadora de Cauchos del Ecuador S.A.</td>
-                    <td>Ing. Carlos Mendoza</td>
-                    <td>022345678</td>
-                    <td>Quito</td>
+                    <td>{{ prov.ruc }}</td>
+                    <td class="fw-bold">{{ prov.empresa }}</td>
+                    <td>{{ prov.contacto }}</td>
+                    <td>{{ prov.telefono }}</td>
+                    <td>{{ prov.ciudad }}</td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>0992345678001</td>
-                    <td>Polímeros y Resinas Cía. Ltda.</td>
-                    <td>Lcda. María Torres</td>
-                    <td>042889900</td>
-                    <td>Guayaquil</td>
+                    <td colspan="5" class="text-center text-muted">No se encontraron proveedores.</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

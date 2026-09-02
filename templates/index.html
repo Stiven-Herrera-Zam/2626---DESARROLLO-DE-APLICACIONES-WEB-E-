@@ -15,148 +15,27 @@
     </div>
 </section> 
 
-<!-- Sección Quiénes Somos -->
-<section id="quienes-somos" class="py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h2 class="text-primary">Quiénes Somos</h2>
-                <p>
-                    Cauchos Coca es una empresa que se localiza en la ciudad de El Coca y cuya actividad consiste en producir piezas de caucho con una calidad superior. 
-                    Se especializa en productos como bujes, alzas de amortiguador, bases de motor y barras estabilizadoras, asegurando durabilidad y resistencia. 
-                    Además, ofrece la fabricación de cualquier tipo de pieza en caucho a la medida, adaptándose a las necesidades específicas de cada cliente.
-                </p>
-            </div>
-            <div class="col-md-6 text-center">
-                <img src="{{ url_for('static', filename='img/Accesorios.jpeg') }}" class="img-fluid rounded shadow" alt="Accesorios Cauchos Coca">
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Sección Servicios o Productos -->
 <section id="servicios-productos" class="bg-light py-5">
     <div class="container">
         <h2 class="text-center text-primary mb-4">Servicios o Productos</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for s in servicios %}
             <div class="col">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Bujes en Caucho</h5>
-                        <p class="card-text">
-                            Fabricación de bujes resistentes y duraderos para vehículos y maquinaria.
-                        </p>
-                        <a href="#contacto" class="btn btn-primary">Solicitar</a>
+                        <h5 class="card-title" fw-bold text-primary">{{ s.titulo }}</h5>
+                        <p class="card-text"> {{ s.descripcion }}</p>
+                        <a href="{{ url_for('contacto') }}" class="btn btn-outline-primary btn-sm">Solicitar</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Barras Estabilizadoras</h5>
-                        <p class="card-text">
-                            Piezas elaboradas para mejorar la estabilidad y seguridad del vehículo.
-                        </p>
-                        <a href="#contacto" class="btn btn-primary">Solicitar</a>
-                    </div>
-                </div>
+            {% else %}
+            <div class="col-12 text-center">
+                <p>No hay servicios registrados en este momento.</p>
             </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Bases de Motor</h5>
-                        <p class="card-text">
-                            Bases de caucho diseñadas para reducir vibraciones y brindar mayor soporte.
-                        </p>
-                        <a href="#contacto" class="btn btn-primary">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Alzas de Amortiguador</h5>
-                        <p class="card-text">
-                            Productos resistentes para mejorar la altura y desempeño de la suspensión.
-                        </p>
-                        <a href="#contacto" class="btn btn-primary">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Oring</h5>
-                        <p class="card-text">
-                            Sellos de caucho elaborados a medida para diferentes usos industriales.
-                        </p>
-                        <a href="#contacto" class="btn btn-primary">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Sección Registro Dinámico de Productos (JavaScript) -->
-<section id="registroproducto" class="container my-5">
-    <h2 class="text-center text-primary mb-4">Registro dinámico de productos</h2>
-
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6">
-            <form id="formProducto" class="card shadow-lg border-0 py-4 bg-light px-3">
-                <div class="mb-3">
-                    <label for="productoNombre" class="form-label">Nombre del producto</label>
-                    <input type="text" id="productoNombre" class="form-control" placeholder="Ejemplo: Buje en caucho">
-                    <div id="errorNombre"></div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="productoDescripcion" class="form-label">Descripción</label>
-                    <textarea id="productoDescripcion" class="form-control" rows="3" placeholder="Ingrese la descripción del producto"></textarea>
-                    <div id="errorDescripcion"></div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="productoCategoria" class="form-label">Categoría o tipo</label>
-                    <select id="productoCategoria" class="form-select">
-                        <option value="">Seleccione una categoría</option>
-                        <option value="Cauchos">Cauchos</option>
-                        <option value="Accesorios">Accesorios</option>
-                        <option value="Servicios">Servicios</option> 
-                        <option value="Repuestos">Repuestos</option> 
-                    </select>
-                    <div id="errorCategoria"></div>
-                </div>
-
-                <div id="mensajeProducto" class="mb-3"></div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Agregar producto
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div class="mt-5">
-        <h3 class="text-center">Productos registrados</h3>
-        <p class="text-center">
-            Total de registros:
-            <span id="totalRegistros" class="badge bg-success">0</span>
-        </p>
-
-        <!-- Contenedor dinámico generado desde JavaScript -->
-        <div id="listaProductos" class="row g-4 mt-3"></div>
-    </div>
-    
-    <div id="spinnerCarga" class="text-center my-3 d-none">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Cargando...</span>
+            {% endfor %}
         </div>
     </div>
 </section>

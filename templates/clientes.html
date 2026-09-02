@@ -4,7 +4,59 @@
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary fw-bold">Gestión de Clientes</h2>
-        <button class="btn btn-success">+ Registrar Cliente</button>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4 mb-4 bg-white">
+        <h4 class="text-secondary mb-3">Registrar Cliente</h4>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    {{ form.cedula.label(class="form-label fw-bold") }}
+                    {{ form.cedula(class="form-control") }}
+                    {% for error in form.cedula.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.nombre.label(class="form-label fw-bold") }}
+                    {{ form.nombre(class="form-control") }}
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.telefono.label(class="form-label fw-bold") }}
+                    {{ form.telefono(class="form-control") }}
+                    {% for error in form.telefono.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.correo.label(class="form-label fw-bold") }}
+                    {{ form.correo(class="form-control") }}
+                    {% for error in form.correo.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.ciudad.label(class="form-label fw-bold") }}
+                    {{ form.ciudad(class="form-control") }}
+                    {% for error in form.ciudad.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-12 text-end mt-3">
+                    {{ form.submit(class="btn btn-success") }}
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="table-responsive bg-white p-3 rounded shadow-sm">
@@ -16,32 +68,22 @@
                     <th>Teléfono</th>
                     <th>Correo Electrónico</th>
                     <th>Ciudad</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
+                {% for c in lista_clientes %}
                 <tr>
-                    <td>1500123456</td>
-                    <td>Juan Carlos Pérez</td>
-                    <td>0991234567</td>
-                    <td>juan.perez@email.com</td>
-                    <td>El Coca</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary">Ver</button>
-                        <button class="btn btn-sm btn-outline-warning">Editar</button>
-                    </td>
+                    <td>{{ c.cedula }}</td>
+                    <td>{{ c.nombre }}</td>
+                    <td>{{ c.telefono }}</td>
+                    <td>{{ c.correo }}</td>
+                    <td>{{ c.ciudad }}</td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>1792019283001</td>
-                    <td>Taller Automotriz El Amigo</td>
-                    <td>0987654321</td>
-                    <td>contacto@tallermedina.com</td>
-                    <td>El Coca</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary">Ver</button>
-                        <button class="btn btn-sm btn-outline-warning">Editar</button>
-                    </td>
+                    <td colspan="5" class="text-center">No hay clientes registrados actualmente.</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

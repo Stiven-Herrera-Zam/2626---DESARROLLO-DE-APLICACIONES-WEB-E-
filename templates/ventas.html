@@ -20,22 +20,26 @@
                 </tr>
             </thead>
             <tbody>
+                {% for v in lista_ventas %}
                 <tr>
-                    <td>V-00101</td>
-                    <td>Juan Carlos Pérez</td>
-                    <td>14/08/2026</td>
-                    <td>$45.00</td>
-                    <td><span class="badge bg-success">Completada</span></td>
+                    <td>{{ v.numero }}</td>
+                    <td>{{ v.cliente }}</td>
+                    <td>{{ v.fecha }}</td>
+                    <td>${{ "%.2f"|format(v.total) }}</td>
+                    <td>
+                        {% if v.estado == 'Completada' %}
+                            <span class="badge bg-success">Completada</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% endif %}
+                    </td>
                     <td><button class="btn btn-sm btn-outline-secondary">Ver Detalle</button></td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>V-00102</td>
-                    <td>Taller Automotriz El Amigo</td>
-                    <td>14/08/2026</td>
-                    <td>$140.00</td>
-                    <td><span class="badge bg-success">Completada</span></td>
-                    <td><button class="btn btn-sm btn-outline-secondary">Ver Detalle</button></td>
+                    <td colspan="6" class="text-center text-muted">No existen registros de ventas.</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
