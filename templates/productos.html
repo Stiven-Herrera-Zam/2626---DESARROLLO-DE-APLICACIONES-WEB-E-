@@ -3,12 +3,18 @@
 {% block content %}
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary fw-bold">Gestión de Productos</h2>
+        <h2 class="text-primary fw-bold">Gestión de Productos (PostgreSQL)</h2>
     </div>
 
     <div class="card shadow-sm border-0 p-4 mb-4 bg-white">
-        <h4 class="text-secondary mb-3">Registrar / Editar Producto</h4>
-        <form method="POST" action="">
+        <h4 class="text-secondary mb-3">
+            {% if producto_editar %}
+                Editar Producto: {{ producto_editar.nombre }}
+            {% else %}
+                Registrar / Editar Producto
+            {% endif %}
+        </h4>
+        <form method="POST" action="{% if producto_editar %}{{ url_for('editar_producto', id=producto_editar.id) }}{% else %}{{ url_for('productos') }}{% endif %}">
             {{ form.hidden_tag() }}
 
             <div class="row g-3">
@@ -29,9 +35,17 @@
                 </div>
 
                 <div class="col-md-4">
-                    {{ form.categoria.label(class="form-label fw-bold") }}
-                    {{ form.categoria(class="form-control") }}
-                    {% for error in form.categoria.errors %}
+                    {{ form.categoria_id.label(class="form-label fw-bold") }}
+                    {{ form.categoria_id(class="form-select") }}
+                    {% for error in form.categoria_id.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.proveedor_id.label(class="form-label fw-bold") }}
+                    {{ form.proveedor_id(class="form-select") }}
+                    {% for error in form.proveedor_id.errors %}
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
@@ -53,7 +67,12 @@
                 </div>
 
                 <div class="col-12 text-end mt-3">
-                    {{ form.submit(class="btn btn-primary") }}
+                    {% if producto_editar %}
+                        <a href="{{ url_for('productos') }}" class="btn btn-outline-secondary me-2">Cancelar</a>
+                        <button type="submit" class="btn btn-warning fw-bold text-dark">Actualizar Producto</button>
+                    {% else %}
+                        {{ form.submit(class="btn btn-primary") }}
+                    {% endif %}
                 </div>
             </div>
         </form>
@@ -66,8 +85,10 @@
                     <th>Código</th>
                     <th>Producto</th>
                     <th>Categoría</th>
+                    <th>Proveedor</th> <!-- NUEVA COLUMNA AÑADIDA -->
                     <th>Precio Unitario</th>
                     <th>Stock</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +97,14 @@
                     <tr>
                         <td>{{ p.codigo }}</td>
                         <td class="fw-bold">{{ p.nombre }}</td>
-                        <td>{{ p.categoria }}</td>
+                        <td><span class="badge bg-secondary">{{ p.categoria_rel.nombre }}</span></td>
+                        <td>
+                            {% if p.proveedor_rel %}
+                                <span class="badge bg-info text-dark">{{ p.proveedor_rel.nombre }}</span>
+                            {% else %}
+                                <span class="text-muted small">Sin proveedor</span>
+                            {% endif %}
+                        </td>
                         <td>${{ "%.2f"|format(p.precio) }}</td>
                         <td>
                             {% if p.stock > 10 %}
@@ -87,11 +115,17 @@
                                 <span class="badge bg-danger">Agotado</span>
                             {% endif %}
                         </td>
+                        <td class="text-center">
+                            <a href="{{ url_for('editar_producto', id=p.id) }}" class="btn btn-sm btn-outline-warning me-1">Editar</a>
+                            <form action="{{ url_for('eliminar_producto', id=p.id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar el producto {{ p.nombre }}?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="5" class="text-center text-muted">No existen productos registrados.</td>
+                        <td colspan="7" class="text-center text-muted py-3">No existen productos registrados en PostgreSQL.</td>
                     </tr>
                 {% endif %}
             </tbody>
